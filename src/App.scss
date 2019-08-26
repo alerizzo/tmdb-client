@@ -1,0 +1,240 @@
+@import '~bulma/sass/utilities/initial-variables';
+@import '~bulma/sass/utilities/functions';
+@import '~bulma/sass/utilities/derived-variables';
+
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+@import '~bulma/sass/utilities/animations';
+@import '~bulma/sass/utilities/mixins';
+@import '~bulma/sass/utilities/controls';
+
+@import '~bulma/sass/base/_all';
+@import '~bulma/sass/elements/_all';
+@import '~bulma/sass/components/_all';
+@import '~bulma/sass/grid/_all';
+@import '~bulma/sass/layout/_all';
+
+@mixin overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+$unit: 8px;
+$footer-height: 3rem;
+
+.container {
+  width: 95%;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #faf9fc;
+
+  main {
+    flex: 1 0 auto;
+  }
+
+  footer {
+    height: $footer-height;
+    flex-shrink: 0;
+  }
+
+  .page-backdrop {
+    &,
+    & > img,
+    &:after {
+      @include overlay;
+    }
+
+    img {
+      mask: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      filter: grayscale(100%) contrast(0.35) opacity(0.5);
+      object-fit: cover;
+    }
+  }
+}
+
+footer {
+  .container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-size: 0.85rem;
+  }
+
+  img {
+    width: 24px;
+    margin-right: 8px;
+  }
+}
+
+.movie-poster {
+  position: relative;
+  width: 100%;
+
+  background: $grey-light;
+  transition: all 0.3s ease-out;
+
+  figure {
+    text-align: center;
+
+    svg {
+      @include overlay;
+      transform: scale(0.7);
+    }
+
+    &:after {
+      content: '';
+      @include overlay;
+
+      transition: opacity 0.3s ease-out;
+      background-image: linear-gradient(
+        to bottom,
+        rgba($black, 0) 0%,
+        rgba($black, 0) 25%,
+        rgba($black, 0.3) 50%,
+        rgba($black, 0.9) 100%
+      );
+
+      opacity: 1;
+    }
+
+    &:before {
+      content: '';
+      @include overlay;
+
+      z-index: 1;
+
+      transition: opacity 0.3s ease-out;
+      background-image: linear-gradient(
+        to bottom,
+        rgba(darken($purple, 10%), 0) 0%,
+        rgba(darken($purple, 10%), 0) 10%,
+        rgba(darken($purple, 10%), 0.5) 35%,
+        rgba(darken($blue, 10%), 0.95) 100%
+      );
+
+      opacity: 0;
+    }
+  }
+
+  & > a > div {
+    @include overlay;
+    padding: 16px;
+    z-index: 2;
+    text-shadow: 0 1px 3px rgba($black, 0.5);
+  }
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 1px 3px rgba($black, 0.5), 0 7px 21px rgba($black, 0.5);
+
+    figure:after {
+      opacity: 0;
+    }
+
+    figure:before {
+      opacity: 1;
+    }
+  }
+}
+
+.movie-header {
+  @include desktop {
+    figure {
+      margin: -16px auto -90% auto;
+      transform: scale(0.85);
+    }
+  }
+
+  figure {
+    background: $grey-light;
+    box-shadow: 0 1px 3px rgba($black, 0.5), 0 7px 21px rgba($black, 0.5);
+
+    svg {
+      @include overlay;
+      transform: scale(0.7);
+    }
+  }
+}
+
+// My Bulma preferences
+.level-item {
+  flex-direction: column;
+  align-items: start;
+}
+
+// Spacers
+
+$spacers: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$spacers: map-merge(
+  (
+    0: 0,
+    1: (
+      $unit * 1,
+    ),
+    2: (
+      $unit * 2,
+    ),
+    3: (
+      $unit * 3,
+    ),
+    4: (
+      $unit * 5,
+    ),
+    5: (
+      $unit * 8,
+    ),
+    6: (
+      $unit * 13,
+    ),
+  ),
+  $spacers
+);
+
+@each $size, $length in $spacers {
+  .mt-#{$size},
+  .my-#{$size} {
+    margin-top: $length !important;
+  }
+  .mr-#{$size},
+  .mx-#{$size} {
+    margin-right: $length !important;
+  }
+  .mb-#{$size},
+  .my-#{$size} {
+    margin-bottom: $length !important;
+  }
+  .ml-#{$size},
+  .mx-#{$size} {
+    margin-left: $length !important;
+  }
+
+  .pt-#{$size},
+  .py-#{$size} {
+    padding-top: $length !important;
+  }
+  .pr-#{$size},
+  .px-#{$size} {
+    padding-right: $length !important;
+  }
+  .pb-#{$size},
+  .py-#{$size} {
+    padding-bottom: $length !important;
+  }
+  .pl-#{$size},
+  .px-#{$size} {
+    padding-left: $length !important;
+  }
+}
