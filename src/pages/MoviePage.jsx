@@ -41,6 +41,7 @@ const MoviePage = observer(
             elevation={4}
             background="white"
             padding={48}
+            marginBottom={48}
             marginLeft={-48}
             marginRight={-48}>
             <MovieSummary movie={movie} />

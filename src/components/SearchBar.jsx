@@ -51,6 +51,7 @@ const SearchBar = observer(
             value={this.state.query}
             height={40}
             marginRight={8}
+            width="100%"
             disabled={cs.results && cs.results.isBusy()}
           />
           <Button

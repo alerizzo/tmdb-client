@@ -152,19 +152,35 @@ footer {
 .movie-header {
   @include desktop {
     figure {
-      margin: -16px auto -90% auto;
+      margin: -32px auto -90% auto;
       transform: scale(0.85);
     }
   }
 
   figure {
-    background: $grey-light;
     box-shadow: 0 1px 3px rgba($black, 0.5), 0 7px 21px rgba($black, 0.5);
+  }
+}
 
-    svg {
-      @include overlay;
-      transform: scale(0.7);
-    }
+figure.image {
+  background: $grey-light;
+
+  svg {
+    @include overlay;
+    transform: scale(0.7);
+  }
+}
+
+.cast-profile {
+  .image,
+  img {
+    border-radius: 2px;
+  }
+
+  img {
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.2);
   }
 }
 
@@ -177,7 +193,6 @@ footer {
 // Spacers
 
 $spacers: () !default;
-// stylelint-disable-next-line scss/dollar-variable-default
 $spacers: map-merge(
   (
     0: 0,
